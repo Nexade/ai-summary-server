@@ -13,7 +13,7 @@ const client = new OpenAI({
 
 app.post("/generate-insights", async (req, res) => {
   try {
-    const { reviewsText } = req.body;
+    const { reviews } = req.body;
 
     const completion = await client.chat.completions.create({
       model: "gpt-5-nano",
@@ -25,7 +25,7 @@ app.post("/generate-insights", async (req, res) => {
         },
         {
           role: "user",
-          content: `Here are some reviews:\n\n${reviewsText}\n\nPlease summarise the main insights following this exact format using 2–5 small points separated by semicolons:\n\nOverall sentiment: Example Point; Example Point; Positive Highlights: Example Point; Example Point; Negatives: Example Point; Example Point; Steps to Improve: Example Point; Example Point;`,
+          content: `Here are some reviews:\n\n${reviews}\n\nPlease summarise the main insights following this exact format using 2–5 small points separated by semicolons:\n\nOverall sentiment: Example Point; Example Point; Positive Highlights: Example Point; Example Point; Negatives: Example Point; Example Point; Steps to Improve: Example Point; Example Point;`,
         },
       ],
     });
