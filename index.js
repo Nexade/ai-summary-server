@@ -13,11 +13,7 @@ const client = new OpenAI({
 
 app.post("/generate-insights", async (req, res) => {
   try {
-    const { reviews } = req.body;
-
-    const reviewsText = Array.isArray(reviews)
-      ? reviews.join("\n\n")
-      : String(reviews || "");
+    const { reviewsText } = req.body;
 
     const completion = await client.chat.completions.create({
       model: "gpt-5-nano",
